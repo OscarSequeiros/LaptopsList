@@ -65,6 +65,10 @@ dependencies {
     implementation "androidx.room:room-runtime:2.3.0"
     implementation "androidx.room:room-ktx:2.3.0"
     kapt "androidx.room:room-compiler:2.3.0"
+    implementation "io.ktor:ktor-client-core:1.6.4"
+    implementation "io.ktor:ktor-client-android:1.6.4"
+    implementation "io.ktor:ktor-client-gson:1.6.4"
+    implementation "io.ktor:ktor-client-logging-jvm:1.6.4"
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'io.mockk:mockk:1.11.0'
