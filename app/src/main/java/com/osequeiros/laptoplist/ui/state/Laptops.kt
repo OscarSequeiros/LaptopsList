@@ -40,14 +40,14 @@ fun Laptop(laptop: Laptop, isTheFinalOne: Boolean) {
         )
         Text(
             text = laptop.title,
-            color = MaterialTheme.colors.primary,
-            style = MaterialTheme.typography.subtitle1
+            color = MaterialTheme.colors.onPrimary,
+            style = MaterialTheme.typography.subtitle2
         )
         Text(
             modifier = Modifier.padding(top = 4.dp),
             text = laptop.description,
-            color = MaterialTheme.colors.primary,
-            style = MaterialTheme.typography.body1,
+            color = MaterialTheme.colors.onPrimary,
+            style = MaterialTheme.typography.body2,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
         )
