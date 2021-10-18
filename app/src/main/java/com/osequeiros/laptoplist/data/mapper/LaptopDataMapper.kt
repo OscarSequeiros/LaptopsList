@@ -8,12 +8,12 @@ import javax.inject.Inject
 class LaptopDataMapper @Inject constructor() {
 
     fun toRoom(laptops: List<RemoteLaptop>): List<RoomLaptop> {
-        return laptops.mapIndexed { index, laptop -> laptop.toRoom(index) }
+        return laptops.mapIndexed { index, laptop -> laptop.toRoom(index + 1) }
     }
 
-    private fun RemoteLaptop.toRoom(index: Int): RoomLaptop {
+    private fun RemoteLaptop.toRoom(order: Int): RoomLaptop {
         return RoomLaptop(
-            id = index.toLong(),
+            id = order.toLong(),
             title = title,
             description = description,
             imageUrl = image
