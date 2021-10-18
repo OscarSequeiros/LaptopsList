@@ -6,7 +6,6 @@ import com.osequeiros.laptoplist.domain.GetLaptopsUseCase
 import com.osequeiros.laptoplist.presentation.state.LaptopsViewState
 import com.osequeiros.laptoplist.presentation.state.LaptopsViewState.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,15 +19,6 @@ class LaptopsViewModel @Inject constructor(
 
     val state: StateFlow<LaptopsViewState>
         get() = _state
-
-    fun getLaptops2(): Flow<LaptopsViewState> {
-        return getLaptopsUseCase()
-            .map { laptops -> SuccessState(laptops) as LaptopsViewState }
-            .onStart { emit(LoadingState) }
-            .catch { error -> emit(ErrorState(error)) }
-            .distinctUntilChanged()
-            .flowOn(Dispatchers.IO)
-    }
 
     fun getLaptops() {
         viewModelScope.launch {
