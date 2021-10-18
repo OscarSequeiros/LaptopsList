@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LaptopsList</string>
+    <string name="error_image">Image for error cases</string>
+    <string name="retry_action">Retry</string>
 </resources>

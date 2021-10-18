@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import com.osequeiros.laptoplist.presentation.LaptopsViewModel
 import com.osequeiros.laptoplist.presentation.state.LaptopsViewState
 import com.osequeiros.laptoplist.presentation.state.LaptopsViewState.*
+import com.osequeiros.laptoplist.ui.state.ErrorTemplate
 import com.osequeiros.laptoplist.ui.state.Laptops
 import com.osequeiros.laptoplist.ui.state.Loader
 import com.osequeiros.laptoplist.ui.theme.LaptopsListTheme
@@ -39,10 +40,19 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun Render(uiState: LaptopsViewState) {
         when (uiState) {
-            is IdleState -> {}
+            is IdleState -> {
+            }
             is LoadingState -> Loader()
             is SuccessState -> Laptops(laptops = uiState.laptops)
-            is ErrorState -> {}
+            is ErrorState -> ManageError(uiState.error)
         }
+    }
+
+    @Composable
+    private fun ManageError(error: Throwable) {
+        //Todo [Tech-note]: It could be ideal to track this error with a tool like Crashlytics
+        error.printStackTrace()
+
+        ErrorTemplate { viewModel.getLaptops() }
     }
 }
