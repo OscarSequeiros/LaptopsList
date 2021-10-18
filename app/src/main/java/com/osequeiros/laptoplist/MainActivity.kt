@@ -1,6 +1,7 @@
 package com.osequeiros.laptoplist
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -9,6 +10,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.osequeiros.laptoplist.domain.model.Laptop
 import com.osequeiros.laptoplist.presentation.LaptopsViewModel
 import com.osequeiros.laptoplist.presentation.state.LaptopsViewState
 import com.osequeiros.laptoplist.presentation.state.LaptopsViewState.*
@@ -43,9 +45,15 @@ class MainActivity : ComponentActivity() {
             is IdleState -> {
             }
             is LoadingState -> Loader()
-            is SuccessState -> Laptops(laptops = uiState.laptops)
+            is SuccessState -> Laptops(laptops = uiState.laptops) { laptop -> seeDetails(laptop) }
             is ErrorState -> ManageError(uiState.error)
         }
+    }
+
+    private fun seeDetails(laptop: Laptop) {
+        // Todo [Tech-note]: Here we can navigate to laptop detail
+        Toast.makeText(this, "Laptop ${laptop.id} was selected", Toast.LENGTH_LONG)
+            .show()
     }
 
     @Composable

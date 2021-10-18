@@ -1,6 +1,7 @@
 package com.osequeiros.laptoplist.ui.state
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -20,20 +21,30 @@ import coil.transform.CircleCropTransformation
 import com.osequeiros.laptoplist.domain.model.Laptop
 
 @Composable
-fun Laptops(laptops: List<Laptop>, modifier: Modifier = Modifier) {
+fun Laptops(
+    laptops: List<Laptop>,
+    modifier: Modifier = Modifier,
+    onLaptopClick: (Laptop) -> Unit = {}
+) {
     LazyColumn(
         modifier = modifier.padding(horizontal = 16.dp),
     ) {
         itemsIndexed(laptops) { index, laptop ->
-            Laptop(laptop, laptops.size == index + 1)
+            Laptop(laptop, laptops.size == index + 1, onClick = onLaptopClick)
         }
     }
 }
 
 @Composable
-fun Laptop(laptop: Laptop, isTheFinalOne: Boolean) {
+fun Laptop(
+    laptop: Laptop,
+    isTheFinalOne: Boolean,
+    onClick: (Laptop) -> Unit = {}
+) {
     Column(
-        modifier = Modifier.padding(top = 16.dp),
+        modifier = Modifier
+            .clickable { onClick(laptop) }
+            .padding(top = 16.dp),
     ) {
         Row {
             Image(
@@ -80,6 +91,7 @@ fun LaptopPreview() {
             "MacBook Pro",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus va",
             imageUrl = "https://picsum.photos/100/100?image=0"
-        ), isTheFinalOne = false
+        ),
+        isTheFinalOne = false
     )
 }
