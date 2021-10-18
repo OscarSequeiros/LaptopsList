@@ -13,6 +13,7 @@ private val DarkColorPalette = darkColors(
     background = DarkJungleGreen,
     onPrimary = Gainsboro,
     onBackground = Gainsboro,
+    surface = SilverChalice,
 )
 
 private val LightColorPalette = lightColors(
@@ -22,15 +23,7 @@ private val LightColorPalette = lightColors(
     onPrimary = Gainsboro,
     background = GhostWhite,
     onBackground = RichBlack,
-
-    /* Other default colors to override
-background = Color.White,
-surface = Color.White,
-onPrimary = Color.White,
-onSecondary = Color.Black,
-onBackground = Color.Black,
-onSurface = Color.Black,
-*/
+    surface = SilverChalice,
 )
 
 @Composable

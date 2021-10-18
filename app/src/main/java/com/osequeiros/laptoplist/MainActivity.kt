@@ -15,6 +15,7 @@ import com.osequeiros.laptoplist.presentation.LaptopsViewModel
 import com.osequeiros.laptoplist.presentation.state.LaptopsViewState
 import com.osequeiros.laptoplist.presentation.state.LaptopsViewState.*
 import com.osequeiros.laptoplist.ui.state.ErrorTemplate
+import com.osequeiros.laptoplist.ui.state.Splash
 import com.osequeiros.laptoplist.ui.state.Laptops
 import com.osequeiros.laptoplist.ui.state.Loader
 import com.osequeiros.laptoplist.ui.theme.LaptopsListTheme
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.getLaptops()
+
         setContent {
             LaptopsListTheme {
                 Surface(color = MaterialTheme.colors.background) {
@@ -42,8 +43,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun Render(uiState: LaptopsViewState) {
         when (uiState) {
-            is IdleState -> {
-            }
+            is IdleState -> Splash()
             is LoadingState -> Loader()
             is SuccessState -> Laptops(laptops = uiState.laptops) { laptop -> seeDetails(laptop) }
             is ErrorState -> ManageError(uiState.error)
