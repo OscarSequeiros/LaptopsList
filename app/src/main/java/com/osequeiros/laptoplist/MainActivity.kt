@@ -22,6 +22,7 @@ import com.osequeiros.laptoplist.presentation.LaptopsViewModel
 import com.osequeiros.laptoplist.presentation.state.LaptopsUiState
 import com.osequeiros.laptoplist.presentation.state.LaptopsUiState.*
 import com.osequeiros.laptoplist.ui.state.Laptops
+import com.osequeiros.laptoplist.ui.state.Loader
 import com.osequeiros.laptoplist.ui.theme.LaptopsListTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -56,16 +57,6 @@ class MainActivity : ComponentActivity() {
             else -> Log.e("uiState", uiState.toString())
         }
     }
-}
-
-@Composable
-fun Loader() {
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loaderdots))
-    val progress by animateLottieCompositionAsState(composition)
-    LottieAnimation(
-        composition,
-        progress,
-    )
 }
 
 @Composable
