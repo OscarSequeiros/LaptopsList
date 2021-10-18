@@ -13,6 +13,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -68,6 +69,7 @@ fun Laptop(
                     color = MaterialTheme.colors.onBackground,
                     style = MaterialTheme.typography.body2,
                     maxLines = 2,
+                    fontStyle = FontStyle.Italic,
                     overflow = TextOverflow.Ellipsis,
                 )
             }
