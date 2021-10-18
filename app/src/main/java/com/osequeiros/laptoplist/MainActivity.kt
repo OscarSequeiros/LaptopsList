@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        viewModel.getLaptops()
         setContent {
             LaptopsListTheme {
                 Surface(color = MaterialTheme.colors.background) {
