@@ -1,12 +1,14 @@
 package com.osequeiros.laptoplist.presentation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.osequeiros.laptoplist.domain.GetLaptopsUseCase
-import com.osequeiros.laptoplist.presentation.state.LaptopsUiState
-import com.osequeiros.laptoplist.presentation.state.LaptopsUiState.*
+import com.osequeiros.laptoplist.presentation.state.LaptopsViewState
+import com.osequeiros.laptoplist.presentation.state.LaptopsViewState.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -14,12 +16,27 @@ class LaptopsViewModel @Inject constructor(
     private val getLaptopsUseCase: GetLaptopsUseCase
 ) : ViewModel() {
 
-    fun getLaptops(): Flow<LaptopsUiState> {
+    private val _state = MutableStateFlow<LaptopsViewState>(LoadingState)
+
+    val state: StateFlow<LaptopsViewState>
+        get() = _state
+
+    fun getLaptops2(): Flow<LaptopsViewState> {
         return getLaptopsUseCase()
-            .map { laptops -> SuccessState(laptops) as LaptopsUiState }
+            .map { laptops -> SuccessState(laptops) as LaptopsViewState }
             .onStart { emit(LoadingState) }
             .catch { error -> emit(ErrorState(error)) }
             .distinctUntilChanged()
             .flowOn(Dispatchers.IO)
+    }
+
+    fun getLaptops() {
+        viewModelScope.launch {
+            getLaptopsUseCase()
+                .map { laptops -> _state.value = SuccessState(laptops) }
+                .onStart { _state.value = LoadingState }
+                .catch { error -> _state.value = ErrorState(error) }
+                .collect()
+        }
     }
 }
