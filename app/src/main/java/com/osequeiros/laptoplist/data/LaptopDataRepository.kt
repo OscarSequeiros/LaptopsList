@@ -20,7 +20,7 @@ class LaptopDataRepository @Inject constructor(
         return flow {
 
             val localLaptops = localSource.getAll().ifEmpty {
-                val remoteLaptops = remoteSource.getPosts()
+                val remoteLaptops = remoteSource.getLaptops()
                 val newLaptops = mapper.toRoom(remoteLaptops)
                 localSource.save(newLaptops)
                 localSource.getAll()

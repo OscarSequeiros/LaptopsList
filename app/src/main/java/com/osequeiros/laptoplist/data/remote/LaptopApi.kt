@@ -34,7 +34,7 @@ class LaptopApi @Inject constructor() {
         }
     }
 
-    suspend fun getPosts(): List<RemoteLaptop> {
+    suspend fun getLaptops(): List<RemoteLaptop> {
         return client.get("list")
     }
 
