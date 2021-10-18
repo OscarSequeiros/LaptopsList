@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.osequeiros.laptoplist.domain.model.Laptop
@@ -24,7 +25,6 @@ fun Laptops(laptops: List<Laptop>, modifier: Modifier = Modifier) {
         itemsIndexed(laptops) { index, laptop ->
             Laptop(laptop, laptops.size == index + 1)
         }
-
     }
 }
 
@@ -58,4 +58,18 @@ fun Laptop(laptop: Laptop, isTheFinalOne: Boolean) {
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun LaptopPreview() {
+    Laptop(
+        laptop =
+        Laptop(
+            1,
+            "MacBook Pro",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus va",
+            imageUrl = "https://picsum.photos/100/100?image=0"
+        ), isTheFinalOne = false
+    )
 }
