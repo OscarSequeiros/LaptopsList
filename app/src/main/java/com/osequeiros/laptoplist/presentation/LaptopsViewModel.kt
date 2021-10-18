@@ -19,6 +19,7 @@ class LaptopsViewModel @Inject constructor(
             .map { laptops -> SuccessState(laptops) as LaptopsUiState }
             .onStart { emit(LoadingState) }
             .catch { error -> emit(ErrorState(error)) }
+            .distinctUntilChanged()
             .flowOn(Dispatchers.IO)
     }
 }
