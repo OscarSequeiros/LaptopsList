@@ -1,7 +1,9 @@
 package com.osequeiros.laptoplist.ui.state
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Divider
@@ -11,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import com.osequeiros.laptoplist.domain.model.Laptop
 
 @Composable
@@ -30,6 +33,11 @@ fun Laptop(laptop: Laptop, isTheFinalOne: Boolean) {
     Column(
         modifier = Modifier.padding(top = 16.dp),
     ) {
+        Image(
+            painter = rememberImagePainter(laptop.imageUrl),
+            contentDescription = null,
+            modifier = Modifier.size(128.dp)
+        )
         Text(
             text = laptop.title,
             color = MaterialTheme.colors.primary,
